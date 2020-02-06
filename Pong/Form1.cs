@@ -27,6 +27,8 @@ namespace Pong
 
         //graphics objects for drawing
         SolidBrush drawBrush = new SolidBrush(Color.White);
+        SolidBrush red = new SolidBrush(Color.Red);
+        SolidBrush blue = new SolidBrush(Color.Blue);
         Font drawFont = new Font("Courier New", 10);
 
         // Sounds for game
@@ -117,10 +119,12 @@ namespace Pong
             }
         }
 
+
+
         /// <summary>
         /// sets the ball and paddle positions for game start
         /// </summary>
-        private void SetParameters()
+        public void SetParameters()
         {
             if (newGameOk)
             {
@@ -152,6 +156,7 @@ namespace Pong
             // TODO set starting Y position for ball to middle of screen, (use this.Height and ball.Height)
             ball.Y = (this.Height / 2) - ball.Height/2;
 
+            BALL_SPEED = 4;
         }
 
         /// <summary>
@@ -163,6 +168,8 @@ namespace Pong
         public void gameUpdateLoop_Tick(object sender, EventArgs e)
         {
 
+            p1Score.Text = Convert.ToString(player1Score);
+            p2Score.Text = Convert.ToString(player2Score);
             if (ballMoveRight == true)
             {
                 ball.X = ball.X + BALL_SPEED;
@@ -259,7 +266,7 @@ namespace Pong
             }
             #region ball collision with side walls (point scored)
 
-            if (ball.X < 0)  // ball hits left wall logic
+            if (ball.X < 0 - ball.Width)  // ball hits left wall logic
             {
                 // TODO
                 scoreSound.Play();
@@ -273,13 +280,29 @@ namespace Pong
                     }
                 else
                 {
-
+                    SetParameters();
                 }
                         
                 // GameOver method. Else change direction of ball and call SetParameters method.
 
             }
 
+            if(ball.X > this.Width)
+            {
+                scoreSound.Play();
+                player1Score++;
+
+                // TODO use if statement to check to see if player 2 has won the game. If true run 
+                if (player1Score >= 5)
+                {
+                    GameOver(winner: "PLAYER 1");
+
+                }
+                else
+                {
+                    SetParameters();
+                }
+            }
             // TODO same as above but this time check for collision with the right wall
 
             #endregion
@@ -299,17 +322,24 @@ namespace Pong
 
             // TODO create game over logic
             // --- stop the gameUpdateLoop
+            gameUpdateLoop.Stop();
             // --- show a message on the startLabel to indicate a winner, (need to Refresh).
+            startLabel.Visible = true;
+            startLabel.Text = winner + " WINS!!!";
+            Refresh();
             // --- pause for two seconds 
+            Thread.Sleep(2000);
             // --- use the startLabel to ask the user if they want to play again
-
+            startLabel.Text = "PRESS SPACE TO PLAY AGAIN";
+            Refresh();
+            BALL_SPEED = 4;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             // TODO draw paddles using FillRectangle
-            e.Graphics.FillRectangle(drawBrush, p1);
-            e.Graphics.FillRectangle(drawBrush, p2);
+            e.Graphics.FillRectangle(red, p1);
+            e.Graphics.FillRectangle(blue, p2);
             // TODO draw ball using FillRectangle
             e.Graphics.FillRectangle(drawBrush, ball);
             // TODO draw scores to the screen using DrawString
