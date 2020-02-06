@@ -47,9 +47,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.startLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startLabel.ForeColor = System.Drawing.Color.White;
-            this.startLabel.Location = new System.Drawing.Point(105, 114);
+            this.startLabel.Location = new System.Drawing.Point(105, 130);
             this.startLabel.Name = "startLabel";
-            this.startLabel.Size = new System.Drawing.Size(410, 93);
+            this.startLabel.Size = new System.Drawing.Size(794, 93);
             this.startLabel.TabIndex = 0;
             this.startLabel.Text = "Press Space To Start";
             this.startLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -58,22 +58,22 @@
             // 
             this.p1Score.AutoSize = true;
             this.p1Score.BackColor = System.Drawing.Color.Transparent;
-            this.p1Score.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.p1Score.Font = new System.Drawing.Font("Comic Sans MS", 30F);
             this.p1Score.ForeColor = System.Drawing.Color.Red;
-            this.p1Score.Location = new System.Drawing.Point(12, 9);
+            this.p1Score.Location = new System.Drawing.Point(64, 9);
             this.p1Score.Name = "p1Score";
-            this.p1Score.Size = new System.Drawing.Size(0, 18);
+            this.p1Score.Size = new System.Drawing.Size(0, 56);
             this.p1Score.TabIndex = 1;
             // 
             // p2Score
             // 
             this.p2Score.AutoSize = true;
             this.p2Score.BackColor = System.Drawing.Color.Transparent;
-            this.p2Score.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.p2Score.Font = new System.Drawing.Font("Comic Sans MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.p2Score.ForeColor = System.Drawing.Color.Blue;
-            this.p2Score.Location = new System.Drawing.Point(569, 9);
+            this.p2Score.Location = new System.Drawing.Point(899, 9);
             this.p2Score.Name = "p2Score";
-            this.p2Score.Size = new System.Drawing.Size(0, 18);
+            this.p2Score.Size = new System.Drawing.Size(0, 56);
             this.p2Score.TabIndex = 2;
             // 
             // Form1
@@ -81,7 +81,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(616, 450);
+            this.ClientSize = new System.Drawing.Size(1000, 450);
             this.Controls.Add(this.p2Score);
             this.Controls.Add(this.p1Score);
             this.Controls.Add(this.startLabel);
@@ -90,6 +90,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pong";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
