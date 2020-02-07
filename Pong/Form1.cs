@@ -306,26 +306,17 @@ namespace Pong
 
             rando = rangen.Next(1, 11);
 
-            if (rando == 1 || rando == 2 || rando == 3 || rando == 4 || rando == 5 || rando == 6 || rando == 7 || rando == 8)
+            if (rando == 1 || rando == 2 || rando == 3 || rando == 4 || rando == 5 || rando == 6 || rando == 7 || rando == 8 || rando == 9)
             {
                 ball.Width = 50;
                 ball.Height = 50;
             }
-            else if (rando == 9)
+            else if (rando == 10)
             {
                 ball.Width = 10;
                 ball.Height = 10;
             }
-            else
-            {
-                ball.Width = 100;
-                ball.Height = 100;
-                if (ballMoveRight == false)
-                {
-                    ball.X = ball.X - 90;
-                }
-
-            }
+            
         }
         /// <param name="winner">The player name to be shown as the winner</param>
         private void GameOver(string winner)
