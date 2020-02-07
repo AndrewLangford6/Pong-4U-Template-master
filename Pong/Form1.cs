@@ -27,6 +27,8 @@ namespace Pong
 
         Random rangen = new Random();
         int rando = 3;
+
+        bool ai = false;
         //graphics objects for drawing
         SolidBrush drawBrush = new SolidBrush(Color.White);
         SolidBrush red = new SolidBrush(Color.Red);
@@ -47,7 +49,7 @@ namespace Pong
         Boolean aKeyDown, zKeyDown, jKeyDown, mKeyDown;
 
         // check to see if a new game can be started
-        Boolean newGameOk = true;
+        Boolean newGameOk = false;
 
         //ball directions, speed, and rectangle
         Boolean ballMoveRight = true;
@@ -62,7 +64,7 @@ namespace Pong
         //player and game scores
         int player1Score = 0;
         int player2Score = 0;
-        int gameWinScore = 2;  // number of points needed to win game
+        int gameWinScore = 5;  // number of points needed to win game
 
         #endregion
 
@@ -73,7 +75,7 @@ namespace Pong
 
         }
         // -- YOU DO NOT NEED TO MAKE CHANGES TO THIS METHOD
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        public void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             //check to see if a key is pressed and set is KeyDown value to true if it has
             switch (e.KeyCode)
@@ -91,11 +93,6 @@ namespace Pong
                     mKeyDown = true;
                     break;
                 case Keys.Y:
-                case Keys.Space:
-                    if (newGameOk)
-                    {
-                        SetParameters();
-                    }
                     break;
                 case Keys.N:
                     if (newGameOk)
@@ -107,7 +104,7 @@ namespace Pong
         }
 
         // -- YOU DO NOT NEED TO MAKE CHANGES TO THIS METHOD
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        public void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             //check to see if a key has been released and set its KeyDown value to false if it has
             switch (e.KeyCode)
@@ -139,9 +136,16 @@ namespace Pong
                 player1Score = player2Score = 0;
                 newGameOk = false;
                 startLabel.Visible = false;
+
+                aiButton.Visible = false;
+                twoP.Visible = false;
+
                 gameUpdateLoop.Start();
             }
 
+
+            aiButton.Visible = false;
+            twoP.Visible = false;
             //set starting position for paddles on new game and point scored 
             const int PADDLE_EDGE = 20;  // buffer distance between screen edge and paddle            
 
@@ -165,6 +169,31 @@ namespace Pong
             ball.Y = (this.Height / 2) - ball.Height / 2;
             sizeGen();
             BALL_SPEED = 4;
+        }
+
+        public void AiButton_Click(object sender, EventArgs e)
+        {
+            
+            ai = true;
+            newGameOk = true;
+            if (newGameOk)
+            {
+                SetParameters();
+
+
+            }
+        }
+
+        public void TwoP_Click(object sender, EventArgs e)
+        {
+            
+            ai = false;
+            newGameOk = true;
+            if (newGameOk)
+            {
+                SetParameters();
+
+            }
         }
 
         /// <summary>
@@ -202,6 +231,15 @@ namespace Pong
             #endregion
 
             #region update paddle positions
+            //ai code
+            if(p2.Y + p2.Height/2 > ball.Y + ball.Height / 2 && ai == true)
+            {
+                p2.Y = p2.Y - PADDLE_SPEED;
+            }
+            else if (p2.Y + p2.Height / 2 < ball.Y + ball.Height / 2 && ai == true)
+            {
+                p2.Y = p2.Y + PADDLE_SPEED;
+            }
 
             if (aKeyDown == true && p1.Y > 0)
             {
@@ -213,12 +251,12 @@ namespace Pong
                 p1.Y = p1.Y + PADDLE_SPEED;
             }
 
-            if (jKeyDown == true && p2.Y > 0)
+            if (jKeyDown == true && p2.Y > 0 && ai == false)
             {
                 p2.Y = p2.Y - PADDLE_SPEED;
             }
 
-            if (mKeyDown == true && p2.Y < this.Height - p2.Height)
+            if (mKeyDown == true && p2.Y < this.Height - p2.Height && ai == false)
             {
                 p2.Y = p2.Y + PADDLE_SPEED;
             }
@@ -325,15 +363,17 @@ namespace Pong
 
 
             gameUpdateLoop.Stop();
-            startLabel.Visible = true;
+            startLabel.Visible = false;
+
+            aiButton.Visible = true;
+            twoP.Visible = true;
+
             startLabel.Text = winner + " WINS!!!";
             p1Score.Text = Convert.ToString(player1Score);
             p2Score.Text = Convert.ToString(player2Score);
             this.Refresh();
             // --- pause for two seconds 
             Thread.Sleep(2000);
-
-            startLabel.Text = "PRESS SPACE TO PLAY AGAIN";
             this.Refresh();
             sizeGen();
             BALL_SPEED = 4;
