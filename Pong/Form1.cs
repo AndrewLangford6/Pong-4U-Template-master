@@ -141,6 +141,7 @@ namespace Pong
                 twoP.Visible = false;
 
                 gameUpdateLoop.Start();
+                this.Focus();
             }
 
 
