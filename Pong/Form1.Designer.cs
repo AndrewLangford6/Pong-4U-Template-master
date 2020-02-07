@@ -45,8 +45,9 @@
             this.startLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.startLabel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.startLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startLabel.ForeColor = System.Drawing.Color.White;
+            this.startLabel.ForeColor = System.Drawing.Color.Black;
             this.startLabel.Location = new System.Drawing.Point(105, 130);
             this.startLabel.Name = "startLabel";
             this.startLabel.Size = new System.Drawing.Size(794, 93);
@@ -80,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1000, 450);
             this.Controls.Add(this.p2Score);
             this.Controls.Add(this.p1Score);

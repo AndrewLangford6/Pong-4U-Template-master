@@ -26,8 +26,7 @@ namespace Pong
         #region global values
 
         Random rangen = new Random();
-        int rando;
-
+        int rando = 3;
         //graphics objects for drawing
         SolidBrush drawBrush = new SolidBrush(Color.White);
         SolidBrush red = new SolidBrush(Color.Red);
@@ -158,13 +157,13 @@ namespace Pong
             p2.Y = this.Height / 2 - p2.Height / 2;
 
             // TODO set Width and Height of ball
-            ball.Height = 84;
-            ball.Width = 84;
+            ball.Height = 100;
+            ball.Width = 100;
             // TODO set starting X position for ball to middle of screen, (use this.Width and ball.Width)
             ball.X = (this.Width / 2) - ball.Width / 2;
             // TODO set starting Y position for ball to middle of screen, (use this.Height and ball.Height)
             ball.Y = (this.Height / 2) - ball.Height / 2;
-
+            sizeGen();
             BALL_SPEED = 4;
         }
 
@@ -249,12 +248,16 @@ namespace Pong
                 ballMoveRight = false;
                 collisionSound.Play();
                 BALL_SPEED++;
+                sizeGen();
+
             }
             if (ball.IntersectsWith(p1))
             {
                 ballMoveRight = true;
                 collisionSound.Play();
                 BALL_SPEED++;
+                sizeGen();
+
             }
 
             #endregion
@@ -298,6 +301,32 @@ namespace Pong
             //refresh the screen, which causes the Form1_Paint method to run
             this.Refresh();
         }
+        public void sizeGen()
+        {
+
+            rando = rangen.Next(1, 11);
+
+            if (rando == 1 || rando == 2 || rando == 3 || rando == 4 || rando == 5 || rando == 6 || rando == 7 || rando == 8)
+            {
+                ball.Width = 50;
+                ball.Height = 50;
+            }
+            else if (rando == 9)
+            {
+                ball.Width = 10;
+                ball.Height = 10;
+            }
+            else
+            {
+                ball.Width = 100;
+                ball.Height = 100;
+                if (ballMoveRight == false)
+                {
+                    ball.X = ball.X - 90;
+                }
+
+            }
+        }
         /// <param name="winner">The player name to be shown as the winner</param>
         private void GameOver(string winner)
         {
@@ -315,6 +344,7 @@ namespace Pong
 
             startLabel.Text = "PRESS SPACE TO PLAY AGAIN";
             this.Refresh();
+            sizeGen();
             BALL_SPEED = 4;
         }
 
@@ -324,24 +354,9 @@ namespace Pong
             e.Graphics.FillRectangle(red, p1);
             e.Graphics.FillRectangle(blue, p2);
             // TODO draw ball using FillRectangle
-            rando = rangen.Next(1, 5);
+            e.Graphics.FillRectangle(purple, ball);
 
-            if (rando == 1)
-            {
-                e.Graphics.FillRectangle(green, ball);
-            }
-            else if (rando == 2)
-            {
-                e.Graphics.FillRectangle(orange, ball);
-            }
-            else if (rando == 3)
-            {
-                e.Graphics.FillRectangle(purple, ball);
-            }
-            else
-            {
-                e.Graphics.FillRectangle(drawBrush, ball);
-            }
+
 
         }
 
