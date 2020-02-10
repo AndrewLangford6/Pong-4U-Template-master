@@ -360,11 +360,11 @@ namespace Pong
         /// <param name="winner">The player name to be shown as the winner</param>
         private void GameOver(string winner)
         {
-            newGameOk = true;
+            
 
 
             gameUpdateLoop.Stop();
-            startLabel.Visible = false;
+            startLabel.Visible = true;
 
             aiButton.Visible = true;
             twoP.Visible = true;
@@ -378,6 +378,8 @@ namespace Pong
             this.Refresh();
             sizeGen();
             BALL_SPEED = 4;
+
+            newGameOk = true;
         }
 
         public void Form1_Paint(object sender, PaintEventArgs e)
